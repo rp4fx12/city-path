@@ -17,7 +17,7 @@ public class CityPathRouteManager implements RouteManager {
 
 	private static final Logger LOGGER = LogManager.getLogger(CityPathRouteManager.class);
 	
-	private Map<String, Set<String>> cityRouteMap = new HashMap<String, Set<String>>();
+	private Map<String, Set<String>> cityRouteMap = new HashMap<>();
 
 	public CityPathRouteManager() {
 	}
