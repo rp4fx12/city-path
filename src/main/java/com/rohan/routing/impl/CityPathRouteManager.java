@@ -84,7 +84,7 @@ public class CityPathRouteManager implements RouteManager {
 			}	
 			
 			if (visited.contains(startCity)) {
-				LOGGER.debug("Could not find route");
+				LOGGER.debug("Could not find route"); //Wasn't sure if I should log this as an error.
 				break;
 			}
 			
