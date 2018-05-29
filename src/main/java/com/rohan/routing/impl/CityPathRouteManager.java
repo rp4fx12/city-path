@@ -64,6 +64,7 @@ public class CityPathRouteManager implements RouteManager {
 				if (path.peek().equals(endCity)) {
 					return new LinkedList<String>(path);
 				}
+				continue;
 			} else {
 				String visitedCity = path.pop();
 				visited.add(visitedCity);
