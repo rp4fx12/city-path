@@ -1,0 +1,8 @@
+# IDE files
+.settings
+.classpath
+dependency-reduced-pom.xml
+.project
+
+# Target folder
+target/
