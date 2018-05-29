@@ -13,7 +13,7 @@ import com.rohan.routing.RouteManager;
 
 public class CityPathRouteManager implements RouteManager {
 	
-	private Map<String, Set<String>> cityRouteMap = new  HashMap<String, Set<String>>();
+	private Map<String, Set<String>> cityRouteMap = new HashMap<String, Set<String>>();
 
 	public CityPathRouteManager() {
 	}
