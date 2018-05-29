@@ -10,8 +10,12 @@ import java.util.Stack;
 
 import com.google.common.collect.Sets;
 import com.rohan.routing.RouteManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class CityPathRouteManager implements RouteManager {
+
+	private static final Logger LOGGER = LogManager.getLogger(CityPathRouteManager.class);
 	
 	private Map<String, Set<String>> cityRouteMap = new HashMap<String, Set<String>>();
 
@@ -23,14 +27,17 @@ public class CityPathRouteManager implements RouteManager {
 	}
 	
 	public boolean connected(String city1, String city2) {
+		LOGGER.info("Verifying if route exists between cities: {}, {}", city1, city2);
 		return this.traverseCityGraph(city1, city2).size() > 0;
 	}
 
-	public List<String> getRoute(String city1, String city2) {		
+	public List<String> getRoute(String city1, String city2) {
+		LOGGER.info("Getting Route for cities: {}, {}", city1, city2);		
 		return traverseCityGraph(city1, city2);
 	}
 
 	public void addConnection(String city1, String city2) {
+		LOGGER.debug("Adding cities to map: {}, {}", city1, city2);
 		this.addCityToMap(city1, city2);
 		this.addCityToMap(city2, city1);
 	}
@@ -54,23 +61,30 @@ public class CityPathRouteManager implements RouteManager {
 		List<String> visited = new LinkedList<>();
 		
 		while (path.size() > 0) {
-			Set<String> adjCities = this.cityRouteMap.get(path.peek());			
+			LOGGER.debug("Finding adjacent cities for city: {}", path.peek());
+			Set<String> adjCities = this.cityRouteMap.get(path.peek());
+			LOGGER.debug("Adjacent cities: {}", adjCities);			
 			Optional<String> potentialCity = adjCities.stream()
 												.filter(c -> !path.contains(c) && !visited.contains(c))
 												.findFirst();
 			
 			if (potentialCity.isPresent()) {
-				path.push(potentialCity.get());
+				String city = potentialCity.get();
+				LOGGER.debug("Found city to check: {}", city);
+				path.push(city);
 				if (path.peek().equals(endCity)) {
+					LOGGER.debug("Found route");
 					return new LinkedList<String>(path);
 				}
 				continue;
 			} else {
 				String visitedCity = path.pop();
+				LOGGER.debug("Explored all options for city: {}", visitedCity);
 				visited.add(visitedCity);
 			}	
 			
 			if (visited.contains(startCity)) {
+				LOGGER.debug("Could not find route");
 				break;
 			}
 			
