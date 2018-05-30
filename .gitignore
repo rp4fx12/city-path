@@ -3,6 +3,7 @@
 .classpath
 dependency-reduced-pom.xml
 .project
+.vscode
 
 # Target folder
 target/
