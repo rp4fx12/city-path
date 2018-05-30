@@ -106,8 +106,8 @@ public class CityPathRouteManager implements RouteManager {
 	}
 	
 	/**
-	 * This method adds two cities to the map and forms a connection
-	 * between both of them
+	 * This method adds a city to the map and forms a connection
+	 * between it and the destination city
 	 * @param sourceCity One of the cities to be added into the map
 	 * @param destCity One of the cities to be added into the map
 	 * @return Nothing
