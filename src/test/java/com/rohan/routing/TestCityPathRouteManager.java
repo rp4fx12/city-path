@@ -23,6 +23,7 @@ public class TestCityPathRouteManager {
 	@Before
 	public void setup() {
 		cityGraph = new CityPathRouteManager();
+		cityGraph.addConnection("Washington", "Washington");
 		cityGraph.addConnection("Washington", "Philadelphia");
 		cityGraph.addConnection("Philadelphia", "Albany");
 		cityGraph.addConnection("Philadelphia", "Chicago");
