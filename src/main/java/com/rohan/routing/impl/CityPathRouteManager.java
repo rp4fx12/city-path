@@ -1,5 +1,6 @@
 package com.rohan.routing.impl;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,9 +18,10 @@ public class CityPathRouteManager implements RouteManager {
 
 	private static final Logger LOGGER = LogManager.getLogger(CityPathRouteManager.class);
 	
-	private Map<String, Set<String>> cityRouteMap = new HashMap<>();
+	private Map<String, Set<String>> cityRouteMap;
 
 	public CityPathRouteManager() {
+		this.cityRouteMap = new HashMap<>();
 	}
 	
 	public CityPathRouteManager(Map<String, Set<String>> cityRouteMap) {
@@ -28,12 +30,21 @@ public class CityPathRouteManager implements RouteManager {
 	
 	public boolean connected(String city1, String city2) {
 		LOGGER.info("Verifying if route exists between cities: {}, {}", city1, city2);
-		return this.traverseCityGraph(city1, city2).size() > 0;
+		if (city1.equals(city2)) {
+			return true;
+		}
+		if (this.citiesInMap(city1, city2)) {
+			return this.traverseCityGraph(city1, city2).size() > 0; 
+		}
+		return false;
 	}
 
 	public List<String> getRoute(String city1, String city2) {
-		LOGGER.info("Getting Route for cities: {}, {}", city1, city2);		
-		return traverseCityGraph(city1, city2);
+		LOGGER.info("Getting Route for cities: {}, {}", city1, city2);
+		if (city1.equals(city2)) {
+			return Arrays.asList(city1);
+		}
+		return this.citiesInMap(city1, city2) ? this.traverseCityGraph(city1, city2) : new LinkedList<>();		
 	}
 
 	public void addConnection(String city1, String city2) {
@@ -44,6 +55,18 @@ public class CityPathRouteManager implements RouteManager {
 	
 	private boolean cityInMap(String city) {
 		return this.cityRouteMap.get(city) != null;
+	}
+
+	private boolean citiesInMap(String city1, String city2) {
+		boolean citiesInMap = true;
+		if (!this.cityInMap(city1)) {
+			LOGGER.error("Could not find {} in map", city1);
+			citiesInMap = false;
+		} else if (!this.cityInMap(city2)) {
+			LOGGER.error("Could not find {} in map", city2);
+			citiesInMap = false;
+		}
+		return citiesInMap;
 	}
 	
 	private void addCityToMap(String sourceCity, String destCity) {
