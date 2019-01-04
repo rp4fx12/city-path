@@ -26,7 +26,7 @@ public class TestBooleans {
 
 
     @Test
-    public void testTrueIsNotFalse() {
+    public void testNotFalseIsTrue() {
         assertTrue("True should not be false", !true);
     }
 }
