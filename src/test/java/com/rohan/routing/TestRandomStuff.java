@@ -9,13 +9,13 @@ public class TestRandomStuff {
 
     @Test
     public void testFalseIsFalse() {
-        assertFalse("False should be false", false);
+        assertFalse("false should be false", false);
     }
 
 
     // Should fail
     @Test
     public void testTrueIsNotFalse() {
-        assertFalse("True should be false", true);
+        assertFalse("(Intentionally failing test) true should be false", true);
     }
 }

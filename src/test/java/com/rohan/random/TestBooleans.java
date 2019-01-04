@@ -9,24 +9,24 @@ public class TestBooleans {
 
     @Test
     public void testFalseIsFalse() {
-        assertFalse("False should be false", false);
+        assertFalse("false should be false", false);
     }
 
 
     // Should fail
     @Test
     public void testTrueIsNotFalse() {
-        assertFalse("True should be false", true);
+        assertFalse("(Intentionally failing tests) true should be false", true);
     }
 
     @Test
     public void testTrueIsTrue() {
-        assertTrue("True should  be true", true);
+        assertTrue("true should be true", true);
     }
 
 
     @Test
     public void testNotFalseIsTrue() {
-        assertTrue("True should not be false", !true);
+        assertTrue("Not false should not be true", !false);
     }
 }
