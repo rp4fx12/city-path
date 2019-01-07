@@ -21,6 +21,7 @@ public class TestRandomStuff {
     
     @Test
     public void runtimeExceptionTest() {
-        throw new RuntimeException();   
+        
+        throw new RuntimeException("this is a runtime exception in the test");   
     }
 }
