@@ -18,4 +18,9 @@ public class TestRandomStuff {
     public void testTrueIsNotFalse() {
         assertFalse("(Intentionally failing test) true should be false", true);
     }
+    
+    @Test
+    public void runtimeExceptionTest() {
+        throw new RuntimeException();   
+    }
 }
